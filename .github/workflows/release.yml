@@ -1,9 +1,7 @@
 name: Release
 
 on:
-  push:
-    tags:
-      - "20*"
+  push
 
 defaults:
   run:
@@ -47,6 +45,7 @@ jobs:
     - name: "Upload to Tagged Release"
       uses: softprops/action-gh-release@v1
       with:
-         files: "AtomicParsley*.zip"
+        tag_name: test
+        files: "AtomicParsley*.zip"
       env:
          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
