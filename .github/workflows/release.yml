@@ -42,6 +42,15 @@ jobs:
     - name: zip
       if: runner.os == 'Windows'
       run: 7z a -tzip AtomicParsleyWindows.zip Release/AtomicParsley.exe
+    - name: build-windows-x86
+      if: runner.os == 'Windows'
+      run: |
+        mkdir buildx86
+        cd buildx86
+        cmake .. -DCMAKE_GENERATOR_PLATFORM=x86 || true
+        cd ..
+        cmake --build buildx86 --config Release
+        7z a -tzip AtomicParsleyWindowsx86.zip Release/AtomicParsley.exe
     - name: "Upload to Tagged Release"
       uses: softprops/action-gh-release@v1
       with:
